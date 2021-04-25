@@ -32,8 +32,9 @@ class QashTable
 {
 public:
     QashTable(int);
-    void insert(Data<std::string>);
+    void insertTest(Data<std::string>, int a, int b, int c);
     void insert(Data<char const*>);
+    void insert(Data<std::string>);
     std::string search(int);
     void print();
     void clear();

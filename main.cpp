@@ -20,8 +20,8 @@ int main(){
     table.insert(data);
     table.insert(data1);
     // table.insert(10);
-    table.print();
-    std::cout << table.search(1);
+    //table.print();
+    //std::cout << table.search(1);
 
     return 0;
 }

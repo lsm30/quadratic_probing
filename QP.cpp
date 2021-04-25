@@ -37,11 +37,10 @@ void QashTable::insert(Data<std::string> data){
         int i = 0;
         while (hashTable[key].key != -1){
             ++i;
-            key = key + (i*i) + 2*i + 1;
+            key = key + 2*(i*i) + 2*i + 1;
             key = key % size;
 
         }
-        std::cout << i << "\n";
         if (input_length < i) {
             input_length = i;
         }
@@ -65,16 +64,47 @@ void QashTable::insert(Data<char const*> data){
         int i = 0;
         while (hashTable[key].key != -1){
             ++i;
-            key = key + (i*i) + 2*i + 1;
+            key = key + 2*(i*i) + 2*i + 1;
             key = key % size;
 
         }
-        std::cout << i << "\n";
         if (input_length < i) {
             input_length = i;
         }
         hashTable[key].key = data.key;
         hashTable[key].value = static_cast<std::string>(data.value);
+    }
+    
+
+}
+
+void QashTable::insertTest(Data<std::string> data, int a, int b, int c){
+    int key = data.key % size;
+
+    if (hashTable[key].key == -1) {
+        hashTable[key].key = data.key;
+        hashTable[key].value = data.value;
+        
+    }
+    else
+    {
+        int i = 0;
+        while (hashTable[key].key != -1){
+            ++i;
+            key = key + a*(i*i) + b*i + c;
+            key = key % size;
+            if (i > 100000)
+            {
+                std::cout << "stuck in loop" << '\n';
+                return;
+            }
+        }
+        std::cout << "probes: " << i << '\n';
+        if (input_length < i) {
+            input_length = i;
+        }
+        hashTable[key].key = data.key;
+        hashTable[key].value = data.value;
     }
     
 
@@ -92,9 +122,9 @@ std::string QashTable::search(int num){
         int i = 0;
         while (hashTable[key].key != num){
             ++i;
-            key = key + (i*i) + 2*i + 1;
+            key = key + 2*(i*i) + 2*i + 1;
             key = key % size;
-            if (i > input_length) {
+            if (i > input_length * 10) {
                 return static_cast<std::string>("not found");
             }
 
