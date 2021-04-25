@@ -21,7 +21,7 @@ public:
     void insert(int);
     void print();
     void clear();
-    virtual ~QashTable() = default;
+    virtual ~QashTable();
 private:
     int size;
     int* hashTable;
