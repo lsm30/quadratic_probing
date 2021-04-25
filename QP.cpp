@@ -47,6 +47,28 @@ void QashTable::insert(int num){
 
 }
 
+int QashTable::search(int num){
+    int key = num % size;
+
+    if (hashTable[key] == num) {
+        return key;
+        
+    }
+    else
+    {
+        int i = 0;
+        while (hashTable[key] != num){
+            ++i;
+            key = key + (i*i) + 2*i + 1;
+            key = key % size;
+
+        }
+        return key;
+    }
+    
+
+}
+
 void QashTable::print()
 {
     for(int i = 0; i < size; i++){

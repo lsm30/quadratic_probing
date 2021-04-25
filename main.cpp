@@ -1,6 +1,7 @@
 
 
 #include "QP.hpp"
+#include <iostream>
 
 int main(){
 
@@ -10,6 +11,7 @@ int main(){
     table.insert(1);
     table.insert(10);
     table.print();
+    std::cout << table.search(1);
 
     return 0;
 }

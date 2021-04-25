@@ -19,6 +19,7 @@ class QashTable
 public:
     QashTable(int);
     void insert(int);
+    int search(int);
     void print();
     void clear();
     virtual ~QashTable();
