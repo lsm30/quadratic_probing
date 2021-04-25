@@ -14,9 +14,6 @@
 #ifndef PROJECT3_QP_H
 #define PROJECT3_QP_H
 
-#include <iostream>
-#include <string>
-
 class QashTable
 {
 public:
@@ -24,6 +21,7 @@ public:
     void insert(int);
     void print();
     void clear();
+    virtual ~QashTable() = default;
 private:
     int size;
     int* hashTable;
