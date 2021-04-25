@@ -33,12 +33,14 @@ class QashTable
 public:
     QashTable(int);
     void insert(Data<std::string>);
+    void insert(Data<char const*>);
     std::string search(int);
     void print();
     void clear();
     virtual ~QashTable();
 private:
     int size;
+    int input_length = 0;
     Data<std::string>* hashTable;
 
 };
@@ -49,5 +51,6 @@ template class Data<char>;
 template class Data<double>;
 template class Data<float>;
 template class Data<std::string>;
+template class Data<char const*>;
 
 #endif
