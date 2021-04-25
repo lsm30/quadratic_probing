@@ -2,14 +2,16 @@
 
 #include "QP.hpp"
 #include <iostream>
+#include <string>
 
 int main(){
-
-    // just for testing purposes. Main will be a separate program for my final submission.
+    std::string hey = "hey";
+    Data data(11,hey);
+    Data data1(1,static_cast<std::string>("can you believe it?"));
     QashTable table(10);
-    table.insert(11);
-    table.insert(1);
-    table.insert(10);
+    table.insert(data);
+    table.insert(data1);
+    // table.insert(10);
     table.print();
     std::cout << table.search(1);
 
