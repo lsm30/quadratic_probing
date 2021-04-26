@@ -11,8 +11,10 @@
  * 2. Print hash table
  *
  */
-#include "QP.hpp"
+// NOTE: due to templating methods, this program must be run at a standard of c++17 or newer
+// If it must be run on c++11, you have to manually declare the type of each Data struct.
 
+#include "QP.hpp"
 #include <iostream>
 
 QashTable::QashTable(int num)
@@ -20,12 +22,13 @@ QashTable::QashTable(int num)
     this->size = num;
     hashTable = static_cast<Data<std::string>*>(::operator new[](num*sizeof(Data<std::string>)));
     for(int i = 0; i < size; i++){
-        ::new (hashTable+i) Data(-1, static_cast<std::string>("null"));
+        ::new (hashTable+i) Data<std::string>(-1, static_cast<std::string>("null"));
     }
 }
 
 void QashTable::insert(Data<std::string> data){
-    int key = data.key % size;
+    // key and i are set to long long and uint to avoid seg faults with large arrays
+    long long key = data.key % size;
 
     if (hashTable[key].key == -1) {
         hashTable[key].key = data.key;
@@ -34,7 +37,7 @@ void QashTable::insert(Data<std::string> data){
     }
     else
     {
-        int i = 0;
+        uint i = 0;
         while (hashTable[key].key != -1){
             ++i;
             key = key + 2*(i*i) + 2*i + 1;
@@ -52,7 +55,7 @@ void QashTable::insert(Data<std::string> data){
 }
 
 void QashTable::insert(Data<char const*> data){
-    int key = data.key % size;
+    long long key = data.key % size;
 
     if (hashTable[key].key == -1) {
         hashTable[key].key = data.key;
@@ -61,7 +64,7 @@ void QashTable::insert(Data<char const*> data){
     }
     else
     {
-        int i = 0;
+        long long i = 0;
         while (hashTable[key].key != -1){
             ++i;
             key = key + 2*(i*i) + 2*i + 1;
@@ -152,12 +155,11 @@ void QashTable::print()
 void QashTable::clear()
 {
     for(int i = 0; i < size; i++){
-        //hashTable[i].key = -1;
+        hashTable[i].key = -1;
     }
 }
 
 // destructor
 QashTable::~QashTable(){
     clear();
-    //delete hashTable;
 }
