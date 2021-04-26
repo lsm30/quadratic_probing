@@ -1,7 +1,6 @@
 
 
 #include "QP.hpp"
-// #include "QP.cpp"
 #include "Nick.cpp"
 #include "doubleHash.cpp"
 #include <ctime>

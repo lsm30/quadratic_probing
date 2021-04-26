@@ -17,6 +17,7 @@
 #include "QP.hpp"
 #include <iostream>
 
+// constructor
 QashTable::QashTable(int num)
 {
     this->size = num;
@@ -26,6 +27,7 @@ QashTable::QashTable(int num)
     }
 }
 
+// insert string
 void QashTable::insert(Data<std::string> data){
     // key and i are set to long long and uint to avoid seg faults with large arrays
     long long key = data.key % size;
@@ -54,6 +56,7 @@ void QashTable::insert(Data<std::string> data){
 
 }
 
+// insert char*
 void QashTable::insert(Data<char const*> data){
     long long key = data.key % size;
 
@@ -64,7 +67,7 @@ void QashTable::insert(Data<char const*> data){
     }
     else
     {
-        long long i = 0;
+        uint i = 0;
         while (hashTable[key].key != -1){
             ++i;
             key = key + 2*(i*i) + 2*i + 1;
@@ -81,6 +84,7 @@ void QashTable::insert(Data<char const*> data){
 
 }
 
+// insert used to test most efficient quadratic function
 void QashTable::insertTest(Data<std::string> data, int a, int b, int c){
     int key = data.key % size;
 
@@ -113,6 +117,7 @@ void QashTable::insertTest(Data<std::string> data, int a, int b, int c){
 
 }
 
+// search
 std::string QashTable::search(int num){
     int key = num % size;
 
@@ -127,17 +132,16 @@ std::string QashTable::search(int num){
             ++i;
             key = key + 2*(i*i) + 2*i + 1;
             key = key % size;
-            if (i > input_length * 10) {
+            if (i > input_length) {
                 return static_cast<std::string>("not found");
             }
 
         }
         return hashTable[key].value;
     }
-    
-
 }
 
+// print
 void QashTable::print()
 {
     for(int i = 0; i < size; i++){
@@ -152,6 +156,7 @@ void QashTable::print()
     }
 }
 
+// clear
 void QashTable::clear()
 {
     for(int i = 0; i < size; i++){
